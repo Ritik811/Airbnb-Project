@@ -1,0 +1,82 @@
+<% layout("layouts/boilerplate") %>
+
+<style>
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .listing-card {
+    width: 20rem;
+    min-height: 23rem; /* 🔹 fixed minimum height */
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .listing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .listing-card .image {
+    height: 18rem; /* increased image height */
+    width: 100%;
+
+    object-fit: cover;
+  }
+
+  .listing-card .card-body {
+    flex-grow: 1;
+    padding: 0.8rem 1rem;
+  }
+
+  .listing-card .card-text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    padding: 0.8rem;
+  }
+
+  .listing-card b {
+    font-size: 1.05rem;
+  }
+
+  .tax-info {
+    font-size: 0.8rem;
+    color: #666;
+  }
+</style>
+
+<div class="row mt-3">
+  <% if (allListings.length === 0) { %>
+    <div class="col-12 text-center">
+      <p class="fs-5 text-muted">No listings found in <%= location %>.</p>
+    </div>
+  <% } %>
+
+  <div class="cards">
+    <% for(let listing of allListings){ %>
+      <a href="/listings/<%=listing._id%>" class="text-decoration-none text-dark">
+        <div class="card listing-card">
+          <img
+            src="<%=listing.image.url%>"
+            class="card-img-top image"
+            alt="listing_Image"
+          />
+          <div class="card-body">
+            <p class="card-text">
+              <b><%= listing.title%></b> <br />
+              &#8377;<%=listing.price.toLocaleString("en-IN")%> /night
+              <i class="tax-info">&nbsp;&nbsp;18% GST</i>
+            </p>
+          </div>
+        </div>
+      </a>
+    <% } %>
+  </div>
+</div>
