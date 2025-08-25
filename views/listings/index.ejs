@@ -5,6 +5,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    gap: 1rem;
   }
 
   .filter {
@@ -34,8 +35,44 @@
     margin-left: 2rem;
     display: flex;
     align-items: center;
+    white-space: nowrap; /* label ek line me rahe */
+  }
+
+  /* 📱 Mobile screens */
+  @media (max-width: 768px) {
+    #filters {
+      justify-content: center; /* icons center ho jaye */
+    }
+
+    .filter {
+      margin-right: 1rem;
+      margin-top: 1rem;
+      flex: 1 1 80px; /* icons responsive width le */
+    }
+
+    .tax-toggle {
+      width: 100%;
+      justify-content: center;
+      margin-left: 0;
+      margin-top: 1rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  /* 📲 Extra small mobile (<=480px) */
+  @media (max-width: 480px) {
+    .filter p {
+      font-size: 0.7rem;
+    }
+
+    .tax-toggle {
+      font-size: 0.7rem;
+      padding: 0.5rem;
+      height: auto;
+    }
   }
 </style>
+
 
 <div id="filters">
   <div class="filter">
