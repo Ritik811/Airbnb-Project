@@ -3,7 +3,8 @@
     background-color: #fe424d;
     color: white;
     border-radius: 25px;
-    padding: 0 1rem 0 1rem;
+    padding: 0 1rem;
+    white-space: nowrap;
   }
 
   .search-btn:hover {
@@ -18,16 +19,60 @@
 
   .search-inp {
     border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
+    padding: 0.5rem 3rem;
     font-size: 1rem;
+  }
+
+  /* 📱 Tablet & Mobile */
+  @media (max-width: 768px) {
+    .navbar-nav.ms-auto.search-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center; /* center align */
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    form.d-flex {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 400px; /* optional limit */
+    }
+
+    .search-inp {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .search-btn {
+      width: 100%;
+      font-size: 0.9rem;
+      padding: 0.5rem;
+    }
+  }
+
+  /* 📲 Extra small phones (<=480px) */
+  @media (max-width: 480px) {
+    .search-inp {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.8rem;
+    }
+
+    .search-btn {
+      font-size: 0.8rem;
+      padding: 0.4rem;
+    }
   }
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"
-      ><i class="fa-regular fa-compass"></i
-    ></a>
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-regular fa-compass"></i>
+    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -36,12 +81,14 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" href="/listings">Explore</a>
       </div>
 
-      <div class="navbar-nav ms-auto">
+      <!-- 🔍 Responsive Search (center in mobile) -->
+      <div class="navbar-nav ms-auto search-wrapper">
         <form class="d-flex" role="search" action="/listings/search" method="GET">
           <input
             class="form-control me-2 search-inp"
@@ -56,6 +103,7 @@
         </form>
       </div>
 
+      <!-- User Auth Links -->
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">Add new Listing</a>
         <% if(!currUser){%>
