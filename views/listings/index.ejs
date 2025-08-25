@@ -38,9 +38,30 @@
     white-space: nowrap; /* label ek line me rahe */
   }
 
-  /* 📱 Mobile me pura filters hide */
+  /* 📱 Mobile screens (filters hide, button show) */
   @media (max-width: 768px) {
     #filters {
+      display: none;
+      flex-direction: column;
+      margin-top: 1rem;
+    }
+
+    #filterBtn {
+      display: block;
+      padding: 0.7rem 1.2rem;
+      margin: 1rem auto;
+      border: none;
+      background: black;
+      color: white;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+  }
+
+  /* 💻 Desktop screens (button hide) */
+  @media (min-width: 769px) {
+    #filterBtn {
       display: none;
     }
   }
@@ -59,7 +80,10 @@
   }
 </style>
 
+<!-- 🔘 Mobile par dikhne wala button -->
+<button id="filterBtn">Filters</button>
 
+<!-- 🧾 Filters Section -->
 <div id="filters">
   <div class="filter">
     <div><i class="fa-solid fa-fire"></i></div>
@@ -119,13 +143,14 @@
         role="switch"
         id="switchCheckDefault"
       />
-      <label class="form-check-label" for="switchCheckDefault"
-        >Display total after taxes</label
-      >
+      <label class="form-check-label" for="switchCheckDefault">
+        Display total after taxes
+      </label>
     </div>
   </div>
 </div>
 
+<!-- 🏠 Listings -->
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
   <% for(let listing of allListings){ %>
   <a href="/listings/<%=listing._id%>" class="listing-link">
@@ -146,20 +171,32 @@
       </div>
     </div>
   </a>
-  <%}%>
+  <% } %>
 </div>
 
 <script>
+  // Tax toggle logic
   let taxSwitch = document.getElementById("switchCheckDefault");
   taxSwitch.addEventListener("click", () => {
     let taxInfo = document.getElementsByClassName("tax-info");
-    console.log(taxInfo);
     for (let info of taxInfo) {
       if (info.style.display != "inline") {
         info.style.display = "inline";
       } else {
         info.style.display = "none";
       }
+    }
+  });
+
+  // Filters toggle button logic (for mobile)
+  const filterBtn = document.getElementById("filterBtn");
+  const filters = document.getElementById("filters");
+
+  filterBtn.addEventListener("click", () => {
+    if (filters.style.display === "none" || filters.style.display === "") {
+      filters.style.display = "flex"; // show
+    } else {
+      filters.style.display = "none"; // hide
     }
   });
 </script>
